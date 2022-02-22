@@ -17,4 +17,4 @@ const normalizePort = (val: string | number): string | number | boolean => {
   return false;
 };
 
-export { normalizePort };
+export default normalizePort;

@@ -13,7 +13,7 @@
     "start:api": "yarn --cwd packages/backend dev",
     "start:ui": "yarn --cwd packages/frontend start"
   },
-  "dependencies": {
+  "devDependencies": {
     "@types/node": "^17.0.19",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
