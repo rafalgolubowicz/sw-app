@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  sw-app-db:
+    container_name: sw-app-db
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: sw-app
+      POSTGRES_PASSWORD: sw-app
+      POSTGRES_DB: sw-app
+    ports:
+      - 5432:5432
+
+  sw-app-backend:
+    container_name: sw-app-backend
+    depends_on:
+      - sw-app-db
+    build:
+      context: .
+      dockerfile: packages/backend/Dockerfile
+    env_file: packages/backend/.env
+    environment:
+      PORT: 8080
+      CHOKIDAR_USEPOLLING: 1
+      DATABASE_URL: postgresql://sw-app:sw-app@sw-app-db:5432/sw-app?schema=public&connect_timeout=300
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/sw-app-backend
+      - /sw-app-backend/node_modules
+
+  sw-app-frontend:
+    container_name: sw-app-frontend
+    build:
+      context: .
+      dockerfile: packages/frontend/Dockerfile
+    env_file: packages/frontend/.env
+    environment:
+      PORT: 3000
+      CHOKIDAR_USEPOLLING: 1
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/sw-app-frontend
+      - /sw-app-frontend/node_modules
