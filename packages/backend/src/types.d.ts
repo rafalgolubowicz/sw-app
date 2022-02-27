@@ -5,6 +5,11 @@ export type PaginatedResult<T> = {
   count: number;
 };
 
+export type PaginatedQuery = {
+  take?: number;
+  skip?: number;
+};
+
 export type ContextWithPaginatedResponse<T> = ParameterizedContext<
   DefaultState,
   DefaultContext,

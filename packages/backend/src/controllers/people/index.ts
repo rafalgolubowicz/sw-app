@@ -2,15 +2,14 @@ import { Next } from 'koa';
 import { Person } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
-import { GetPeopleQueryParams } from './types';
-import { ContextWithPaginatedResponse } from '../../types';
+import { ContextWithPaginatedResponse, PaginatedQuery } from '../../types';
 import { findPeople, getPeopleCount } from '../../services';
 
 const getPeople = async (
   ctx: ContextWithPaginatedResponse<Person>,
   next: Next,
 ) => {
-  const { skip, take } = ctx.request.query as GetPeopleQueryParams;
+  const { skip, take } = ctx.request.query as PaginatedQuery;
 
   const people = await findPeople({ skip, take });
 
