@@ -16,4 +16,5 @@ const port = normalizePort(PORT);
 
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
+  console.log(`Swagger started at http://localhost:${port}/__swagger`);
 });
