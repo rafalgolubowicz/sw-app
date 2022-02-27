@@ -1,1 +1,1 @@
-export * from './peopleService';
+export * from './people';
