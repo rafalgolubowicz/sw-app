@@ -1,13 +1,13 @@
 import './setup/config';
 
-import Koa from 'koa';
-import cors from '@koa/cors';
-
-import { CORS_ORIGIN, PORT } from './setup/environment';
+import router from './router';
+import { PORT } from './setup/environment';
+import createServer from './utils/createServer';
 import normalizePort from './utils/normalizePort';
 
-const app = new Koa();
-app.use(cors({ origin: CORS_ORIGIN }));
+const app = createServer();
+
+app.use(router.routes());
 
 const port = normalizePort(PORT);
 
