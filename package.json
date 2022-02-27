@@ -13,7 +13,8 @@
     "start:api": "yarn --cwd packages/backend dev",
     "start:ui": "yarn --cwd packages/frontend start",
     "gen-types:api": "yarn --cwd packages/backend generate",
-    "migrate:db": "yarn --cwd packages/backend migrate"
+    "migrate:db": "yarn --cwd packages/backend migrate",
+    "seed:db": "yarn --cwd packages/backend seed"
   },
   "devDependencies": {
     "@types/node": "^17.0.19",
