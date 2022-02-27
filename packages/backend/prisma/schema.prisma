@@ -9,3 +9,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Person {
+  id        Int      @id @default(autoincrement())
+  name      String
+  height    Int
+  mass      Int
+  hairColor String?
+  skinColor String?
+  eyeColor  String?
+  birthYear String?
+  gender    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Starship {
+  id            Int      @id @default(autoincrement())
+  name          String
+  model         String
+  crew          Int
+  cargoCapacity BigInt
+  MGLT          Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+}

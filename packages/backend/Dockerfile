@@ -8,4 +8,4 @@ COPY packages/backend packages/backend
 
 RUN yarn --pure-lockfile --non-interactive
 
-CMD yarn start:api
+CMD yarn gen-types:api ; yarn migrate:db ; yarn start:api
