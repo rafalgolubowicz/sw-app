@@ -51,6 +51,33 @@
           "400": { "description": "Invalid format of query params" }
         }
       }
+    },
+    "/people/{id}": {
+      "get": {
+        "tags": ["people"],
+        "summary": "Get specified person",
+        "operationId": "getPerson",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Person details",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "500": { "description": "Internal server error" },
+          "404": { "description": "Person not found" }
+        }
+      }
     }
   },
   "definitions": {

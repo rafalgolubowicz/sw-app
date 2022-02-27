@@ -2,8 +2,12 @@ import { Next } from 'koa';
 import { Person } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
-import { ContextWithPaginatedResponse, PaginatedQuery } from '../../types';
-import { findPeople, getPeopleCount } from '../../services';
+import {
+  ContextWithPaginatedResponse,
+  KoaContext,
+  PaginatedQuery,
+} from '../../types';
+import { findPeople, findPerson, getPeopleCount } from '../../services';
 
 const getPeople = async (
   ctx: ContextWithPaginatedResponse<Person>,
@@ -21,9 +25,29 @@ const getPeople = async (
     count: peopleCount,
   };
 
-  next();
+  return next();
 };
 
-export { getPeople };
+const getPerson = async (ctx: KoaContext, next: Next) => {
+  try {
+    const { id } = ctx.params;
+
+    const person = await findPerson(+id);
+
+    if (!person) {
+      ctx.status = StatusCodes.NOT_FOUND;
+      return next();
+    }
+
+    ctx.status = StatusCodes.OK;
+    ctx.body = person;
+
+    return next();
+  } catch {
+    ctx.status = StatusCodes.INTERNAL_SERVER_ERROR;
+  }
+};
+
+export { getPeople, getPerson };
 
 export * from './schema';
