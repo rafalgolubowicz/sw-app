@@ -8,6 +8,7 @@ import {
   patchPerson,
   removePerson,
 } from './people.controller';
+import { createMockPerson } from '../../test/helpers';
 import { prismaMock } from '../../test/prismaMock';
 import { createContextMock } from '../../test/createContextMock';
 
@@ -31,12 +32,7 @@ describe('People Controller', () => {
   });
 
   describe('getPerson', () => {
-    const person = {
-      name: 'Luke Skywalker',
-      mass: 77,
-      height: 172,
-      skinColor: 'black',
-    };
+    const person = createMockPerson();
 
     it('should return person', async () => {
       const { ctx, next } = createContextMock({
@@ -45,7 +41,7 @@ describe('People Controller', () => {
         },
       });
 
-      prismaMock.person.findUnique.mockResolvedValue(person as Person);
+      prismaMock.person.findUnique.mockResolvedValue(person);
 
       await getPerson(ctx, next);
 
@@ -75,16 +71,11 @@ describe('People Controller', () => {
   });
 
   describe('createPerson', () => {
-    const person = {
-      name: 'Luke Skywalker',
-      mass: 77,
-      height: 172,
-      skinColor: 'black',
-    };
+    const person = createMockPerson();
 
     it('should create and return person', async () => {
       const { ctx, next } = createContextMock({ body: person });
-      prismaMock.person.create.mockResolvedValue(person as Person);
+      prismaMock.person.create.mockResolvedValue(person);
 
       await addPerson(ctx, next);
 
@@ -124,12 +115,7 @@ describe('People Controller', () => {
   });
 
   describe('patchPerson', () => {
-    const person = {
-      name: 'Luke Skywalker',
-      mass: 77,
-      height: 172,
-      skinColor: 'black',
-    };
+    const person = createMockPerson();
 
     it('should update and return person', async () => {
       const { ctx, next } = createContextMock({
@@ -139,7 +125,7 @@ describe('People Controller', () => {
         body: person,
       });
 
-      prismaMock.person.update.mockResolvedValue(person as Person);
+      prismaMock.person.update.mockResolvedValue(person);
 
       await patchPerson(ctx, next);
 

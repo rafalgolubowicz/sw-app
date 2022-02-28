@@ -1,6 +1,5 @@
-import { Person } from '@prisma/client';
-
 import { prismaMock } from '../../test/prismaMock';
+import { createMockPerson } from '../../test/helpers';
 import { createPerson, deletePerson, updatePerson } from './people.service';
 import { InvalidArgumentException } from '../../exceptions/InvalidArgument.exception';
 
@@ -9,16 +8,11 @@ import { InvalidArgumentException } from '../../exceptions/InvalidArgument.excep
   Read more: https://www.prisma.io/docs/guides/testing/unit-testing#example-unit-tests
 */
 describe('People Service', () => {
-  const person = {
-    name: 'Luke Skywalker',
-    mass: 77,
-    height: 172,
-    skinColor: 'black',
-  };
+  const person = createMockPerson();
 
   describe('createPerson', () => {
     it('should return created person', async () => {
-      prismaMock.person.create.mockResolvedValue(person as Person);
+      prismaMock.person.create.mockResolvedValue(person);
 
       await expect(createPerson(person)).resolves.toEqual({
         name: 'Luke Skywalker',
@@ -29,12 +23,7 @@ describe('People Service', () => {
     });
 
     it('should throw InvalidArgumentException', async () => {
-      const person = {
-        name: 'Luke Skywalker',
-        mass: -77,
-        height: 0,
-        skinColor: 'black',
-      };
+      const person = createMockPerson({ mass: -77 });
 
       await expect(() => createPerson(person)).toThrow(
         InvalidArgumentException,
@@ -47,7 +36,7 @@ describe('People Service', () => {
       prismaMock.person.delete.mockResolvedValue({
         ...person,
         id: 1,
-      } as Person);
+      });
 
       await expect(deletePerson(1)).resolves.toEqual({
         id: 1,
@@ -65,7 +54,7 @@ describe('People Service', () => {
 
   describe('updatePerson', () => {
     it('should return updated person', async () => {
-      prismaMock.person.update.mockResolvedValue(person as Person);
+      prismaMock.person.update.mockResolvedValue(person);
 
       await expect(updatePerson(1, person)).resolves.toEqual({
         name: 'Luke Skywalker',
