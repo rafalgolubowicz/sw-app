@@ -9,7 +9,7 @@ import {
   removePerson,
 } from './people.controller';
 import { prismaMock } from '../../test/prismaMock';
-import { createContextMock } from '../../test/contextMock';
+import { createContextMock } from '../../test/createContextMock';
 
 describe('People Controller', () => {
   describe('getPeople', () => {
@@ -39,12 +39,13 @@ describe('People Controller', () => {
     };
 
     it('should return person', async () => {
-      const { ctx, next } = createContextMock();
-      prismaMock.person.findUnique.mockResolvedValue(person as Person);
+      const { ctx, next } = createContextMock({
+        query: {
+          id: '1',
+        },
+      });
 
-      ctx.request.query = {
-        id: '1',
-      };
+      prismaMock.person.findUnique.mockResolvedValue(person as Person);
 
       await getPerson(ctx, next);
 
@@ -59,11 +60,11 @@ describe('People Controller', () => {
     });
 
     it('should return 404', async () => {
-      const { ctx, next } = createContextMock();
-
-      ctx.params = {
-        id: '1',
-      };
+      const { ctx, next } = createContextMock({
+        params: {
+          id: '1',
+        },
+      });
 
       await getPerson(ctx, next);
 
@@ -82,10 +83,8 @@ describe('People Controller', () => {
     };
 
     it('should create and return person', async () => {
-      const { ctx, next } = createContextMock();
+      const { ctx, next } = createContextMock({ body: person });
       prismaMock.person.create.mockResolvedValue(person as Person);
-
-      ctx.request.body = person;
 
       await addPerson(ctx, next);
 
@@ -100,9 +99,9 @@ describe('People Controller', () => {
     });
 
     it('should throw 404 if mass is negative', async () => {
-      const { ctx, next } = createContextMock();
-
-      ctx.request.body = { ...person, mass: -10 };
+      const { ctx, next } = createContextMock({
+        body: { ...person, mass: -10 },
+      });
 
       await addPerson(ctx, next);
 
@@ -111,9 +110,9 @@ describe('People Controller', () => {
     });
 
     it('should throw 404 if height is negative', async () => {
-      const { ctx, next } = createContextMock();
-
-      ctx.request.body = { ...person, height: -10 };
+      const { ctx, next } = createContextMock({
+        body: { ...person, height: -10 },
+      });
 
       await addPerson(ctx, next);
 
@@ -131,13 +130,14 @@ describe('People Controller', () => {
     };
 
     it('should update and return person', async () => {
-      const { ctx, next } = createContextMock();
-      prismaMock.person.update.mockResolvedValue(person as Person);
+      const { ctx, next } = createContextMock({
+        params: {
+          id: '1',
+        },
+        body: person,
+      });
 
-      ctx.params = {
-        id: '1',
-      };
-      ctx.request.body = person;
+      prismaMock.person.update.mockResolvedValue(person as Person);
 
       await patchPerson(ctx, next);
 
@@ -152,12 +152,12 @@ describe('People Controller', () => {
     });
 
     it('should throw 404 if mass is negative', async () => {
-      const { ctx, next } = createContextMock();
-
-      ctx.params = {
-        id: '1',
-      };
-      ctx.request.body = { ...person, mass: -10 };
+      const { ctx, next } = createContextMock({
+        params: {
+          id: '1',
+        },
+        body: { ...person, mass: -10 },
+      });
 
       await patchPerson(ctx, next);
 
@@ -166,12 +166,12 @@ describe('People Controller', () => {
     });
 
     it('should throw 404 if height is negative', async () => {
-      const { ctx, next } = createContextMock();
-
-      ctx.params = {
-        id: '1',
-      };
-      ctx.request.body = { ...person, height: -10 };
+      const { ctx, next } = createContextMock({
+        params: {
+          id: '1',
+        },
+        body: { ...person, height: -10 },
+      });
 
       await patchPerson(ctx, next);
 
@@ -182,12 +182,13 @@ describe('People Controller', () => {
 
   describe('removePerson', () => {
     it('should remove person', async () => {
-      const { ctx, next } = createContextMock();
-      prismaMock.person.delete.mockResolvedValue({} as Person);
+      const { ctx, next } = createContextMock({
+        params: {
+          id: '1',
+        },
+      });
 
-      ctx.params = {
-        id: '1',
-      };
+      prismaMock.person.delete.mockResolvedValue({} as Person);
 
       await removePerson(ctx, next);
 
