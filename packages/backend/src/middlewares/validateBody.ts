@@ -1,11 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
-import { Next, ParameterizedContext } from 'koa';
+import { Next } from 'koa';
+import { KoaContext } from 'src/types';
 import { AnySchema, ValidationError } from 'yup';
 
 const validateBody =
-  (schema: AnySchema) => async (ctx: ParameterizedContext, next: Next) => {
+  (schema: AnySchema) => async (ctx: KoaContext<any>, next: Next) => {
     try {
-      await schema.validate(ctx.body, { abortEarly: false });
+      await schema.validate(ctx.request.body, { abortEarly: false });
 
       return next();
     } catch (err) {

@@ -7,6 +7,42 @@
   ],
   "paths": {
     "/people": {
+      "post": {
+        "tags": ["people"],
+        "summary": "Create a person",
+        "operationId": "createPerson",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "schema": {
+              "type": "object",
+              "required": ["name", "mass", "height"],
+              "properties": {
+                "name": { "type": "string", "example": "Luke Skywalker" },
+                "height": { "type": "integer", "example": 172 },
+                "mass": { "type": "integer", "example": 77 },
+                "hairColor": { "type": "string", "example": "blond" },
+                "skinColor": { "type": "string", "example": "fair" },
+                "eyeColor": { "type": "string", "example": "blue" },
+                "birthYear": { "type": "string", "example": "19BBY" },
+                "gender": { "type": "string", "example": "male" }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Person data",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "404": { "description": "Invalid data" }
+        }
+      },
       "get": {
         "tags": ["people"],
         "summary": "Get all the people resources",

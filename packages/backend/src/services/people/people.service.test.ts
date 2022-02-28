@@ -1,6 +1,6 @@
 import { Person } from '@prisma/client';
 
-import { addPerson } from './index';
+import { addPerson } from './people.service';
 import { prismaMock } from '../../test/prismaMock';
 import { InvalidArgumentException } from '../../exceptions/InvalidArgument.exception';
 
