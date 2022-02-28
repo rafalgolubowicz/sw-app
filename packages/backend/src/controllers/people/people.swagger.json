@@ -113,6 +113,72 @@
           "500": { "description": "Internal server error" },
           "404": { "description": "Person not found" }
         }
+      },
+      "delete": {
+        "tags": ["people"],
+        "summary": "Delete specified person",
+        "operationId": "removePerson",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Person has been removed",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "404": { "description": "Person not found" }
+        }
+      },
+      "patch": {
+        "tags": ["people"],
+        "summary": "Partially update a person",
+        "operationId": "patchPerson",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "example": "Luke Skywalker" },
+                "height": { "type": "integer", "example": 172 },
+                "mass": { "type": "integer", "example": 77 },
+                "hairColor": { "type": "string", "example": "blond" },
+                "skinColor": { "type": "string", "example": "fair" },
+                "eyeColor": { "type": "string", "example": "blue" },
+                "birthYear": { "type": "string", "example": "19BBY" },
+                "gender": { "type": "string", "example": "male" }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated person data",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "404": { "description": "Invalid data" }
+        }
       }
     }
   },

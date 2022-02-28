@@ -1,23 +1,23 @@
-import { Next } from 'koa';
-import { Person } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import {
-  ContextWithPaginatedResponse,
-  KoaContext,
-  PaginatedQuery,
-} from '../../types';
+  AddPerson,
+  GetPeople,
+  GetPerson,
+  PatchPerson,
+  RemovePerson,
+} from './types';
 import {
-  addPerson,
   findPeople,
   findPerson,
+  createPerson,
   getPeopleCount,
+  deletePerson,
+  updatePerson,
 } from '../../services';
+import { PaginatedQuery } from '../../types';
 
-const getPeople = async (
-  ctx: ContextWithPaginatedResponse<Person>,
-  next: Next,
-) => {
+const getPeople: GetPeople = async (ctx, next) => {
   const { skip, take } = ctx.request.query as PaginatedQuery;
 
   const people = await findPeople({ skip, take });
@@ -32,9 +32,8 @@ const getPeople = async (
   return next();
 };
 
-const getPerson = async (ctx: KoaContext, next: Next) => {
+const getPerson: GetPerson = async (ctx, next) => {
   const { id } = ctx.params;
-
   const person = await findPerson(+id);
 
   if (!person) {
@@ -49,9 +48,9 @@ const getPerson = async (ctx: KoaContext, next: Next) => {
   return next();
 };
 
-const createPerson = async (ctx: KoaContext<Person>, next: Next) => {
+const addPerson: AddPerson = async (ctx, next) => {
   try {
-    const person = await addPerson(ctx.request.body);
+    const person = await createPerson(ctx.request.body);
 
     ctx.body = person;
     ctx.status = StatusCodes.OK;
@@ -63,4 +62,28 @@ const createPerson = async (ctx: KoaContext<Person>, next: Next) => {
   }
 };
 
-export { getPeople, getPerson, createPerson };
+const patchPerson: PatchPerson = async (ctx, next) => {
+  try {
+    const { id } = ctx.params;
+    const person = await updatePerson(+id, ctx.request.body);
+
+    ctx.body = person;
+    ctx.status = StatusCodes.OK;
+
+    return next();
+  } catch (err) {
+    ctx.status = StatusCodes.BAD_REQUEST;
+    ctx.body = err.message;
+  }
+};
+
+const removePerson: RemovePerson = async (ctx, next) => {
+  const { id } = ctx.params;
+  const deletedPerson = await deletePerson(+id);
+
+  ctx.status = deletedPerson ? StatusCodes.NO_CONTENT : StatusCodes.NOT_FOUND;
+
+  return next();
+};
+
+export { getPeople, getPerson, addPerson, patchPerson, removePerson };

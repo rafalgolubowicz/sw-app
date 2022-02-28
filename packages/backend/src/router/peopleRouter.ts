@@ -3,8 +3,11 @@ import KoaRouter from '@koa/router';
 import {
   getPeople,
   getPerson,
-  createPerson,
-  CreatePersonBodySchema,
+  addPerson,
+  patchPerson,
+  removePerson,
+  AddPersonBodySchema,
+  PatchPersonBodySchema,
   GetPeopleQueryParamsSchema,
 } from '../controllers/people';
 import { API_ROUTES } from './const';
@@ -15,7 +18,9 @@ const peopleRouter = new KoaRouter({ prefix: API_ROUTES.PEOPLE });
 
 peopleRouter
   .get('/', validateQueryParams(GetPeopleQueryParamsSchema), getPeople)
-  .post('/', validateBody(CreatePersonBodySchema), createPerson)
-  .get('/:id', getPerson);
+  .get('/:id', getPerson)
+  .post('/', validateBody(AddPersonBodySchema), addPerson)
+  .patch('/:id', validateBody(PatchPersonBodySchema), patchPerson)
+  .delete('/:id', removePerson);
 
 export default peopleRouter;
