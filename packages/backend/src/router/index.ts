@@ -1,9 +1,9 @@
 import KoaRouter from '@koa/router';
 
-import peopleApiRouter from './peopleApiRouter';
+import peopleRouter from './peopleRouter';
 
 const router = new KoaRouter();
 
-router.use(peopleApiRouter.routes());
+router.use(peopleRouter.routes());
 
 export default router;

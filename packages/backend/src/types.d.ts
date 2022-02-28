@@ -1,3 +1,4 @@
+import { RouterParamContext } from '@koa/router';
 import { DefaultContext, DefaultState, ParameterizedContext } from 'koa';
 
 export type PaginatedResult<T> = {
@@ -10,8 +11,10 @@ export type PaginatedQuery = {
   skip?: number;
 };
 
-export type ContextWithPaginatedResponse<T> = ParameterizedContext<
+export type KoaContext<T = unknown> = ParameterizedContext<
   DefaultState,
-  DefaultContext,
-  PaginatedResult<T>
+  DefaultContext & RouterParamContext<DefaultState, DefaultContext>,
+  T
 >;
+
+export type ContextWithPaginatedResponse<T> = KoaContext<PaginatedResult<T>>;
