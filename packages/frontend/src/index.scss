@@ -1,0 +1,34 @@
+.site-layout {
+  height: 100vh;
+
+  .site-layout-background {
+    background: #fff;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .ant-typography {
+      color: white !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  main {
+    padding: 24px 50px;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.text-white {
+  color: white;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}

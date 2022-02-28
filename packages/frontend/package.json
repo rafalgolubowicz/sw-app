@@ -2,12 +2,27 @@
   "name": "@sw-app/frontend",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "extract": "formatjs extract './src/**/*.ts*' --ignore './src/**/*.d.ts' --out-file './content/locales/en.json'",
+    "compile": "formatjs compile-folder --ast './content/locales' './content/locales/compiled'",
+    "gen-translations": "yarn extract && yarn compile"
+  },
   "dependencies": {
+    "@formatjs/intl": "^2.0.0",
+    "antd": "^4.18.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0"
+    "react-intl": "^5.24.6",
+    "react-router-dom": "6",
+    "react-scripts": "5.0.0",
+    "sass": "^1.49.9"
   },
   "devDependencies": {
+    "@formatjs/cli": "^4.8.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
@@ -16,12 +31,6 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "typescript": "^4.5.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
