@@ -5,9 +5,16 @@ export type FindPeopleParams = {
   skip?: number;
 };
 
-export type FindPeople = (params: FindPeopleParams) => Promise<Person[]>;
-export type FindPerson = (id: number) => Promise<Person | null>;
 export type GetPeopleCount = () => Promise<number>;
-export type AddPerson = (
+export type DeletePerson = (id: number) => Promise<Person>;
+export type FindPerson = (id: number) => Promise<Person | null>;
+export type FindPeople = (params: FindPeopleParams) => Promise<Person[]>;
+
+export type CreatePerson = (
   user: Prisma.PersonUncheckedCreateInput,
+) => Promise<Person>;
+
+export type UpdatePerson = (
+  id: number,
+  person: Prisma.PersonUncheckedUpdateInput,
 ) => Promise<Person>;
