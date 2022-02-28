@@ -16,7 +16,6 @@ const getPeople = async (
   const { skip, take } = ctx.request.query as PaginatedQuery;
 
   const people = await findPeople({ skip, take });
-
   const peopleCount = await getPeopleCount();
 
   ctx.status = StatusCodes.OK;
@@ -29,23 +28,20 @@ const getPeople = async (
 };
 
 const getPerson = async (ctx: KoaContext, next: Next) => {
-  try {
-    const { id } = ctx.params;
-    const person = await findPerson(+id);
+  const { id } = ctx.params;
 
-    if (!person) {
-      ctx.status = StatusCodes.NOT_FOUND;
+  const person = await findPerson(+id);
 
-      return next();
-    }
-
-    ctx.status = StatusCodes.OK;
-    ctx.body = person;
+  if (!person) {
+    ctx.status = StatusCodes.NOT_FOUND;
 
     return next();
-  } catch {
-    ctx.status = StatusCodes.INTERNAL_SERVER_ERROR;
   }
+
+  ctx.status = StatusCodes.OK;
+  ctx.body = person;
+
+  return next();
 };
 
 export { getPeople, getPerson };
