@@ -40,7 +40,7 @@
               "$ref": "#/definitions/Person"
             }
           },
-          "404": { "description": "Invalid data" }
+          "400": { "description": "Invalid data" }
         }
       },
       "get": {
@@ -177,7 +177,8 @@
               "$ref": "#/definitions/Person"
             }
           },
-          "404": { "description": "Invalid data" }
+          "400": { "description": "Invalid data" },
+          "404": { "description": "Person not found" }
         }
       }
     }

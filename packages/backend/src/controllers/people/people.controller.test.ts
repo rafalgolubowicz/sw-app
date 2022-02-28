@@ -98,26 +98,28 @@ describe('People Controller', () => {
       });
     });
 
-    it('should throw 404 if mass is negative', async () => {
-      const { ctx, next } = createContextMock({
-        body: { ...person, mass: -10 },
+    describe('should return 400', () => {
+      it('if mass is negative', async () => {
+        const { ctx, next } = createContextMock({
+          body: { ...person, mass: -10 },
+        });
+
+        await addPerson(ctx, next);
+
+        expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
+        expect(ctx.body).toBe('Height or mass cannot be a negative number.');
       });
 
-      await addPerson(ctx, next);
+      it('if height is negative', async () => {
+        const { ctx, next } = createContextMock({
+          body: { ...person, height: -10 },
+        });
 
-      expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
-      expect(ctx.body).toBe('Height or mass cannot be a negative number.');
-    });
+        await addPerson(ctx, next);
 
-    it('should throw 404 if height is negative', async () => {
-      const { ctx, next } = createContextMock({
-        body: { ...person, height: -10 },
+        expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
+        expect(ctx.body).toBe('Height or mass cannot be a negative number.');
       });
-
-      await addPerson(ctx, next);
-
-      expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
-      expect(ctx.body).toBe('Height or mass cannot be a negative number.');
     });
   });
 
@@ -151,32 +153,34 @@ describe('People Controller', () => {
       });
     });
 
-    it('should throw 404 if mass is negative', async () => {
-      const { ctx, next } = createContextMock({
-        params: {
-          id: '1',
-        },
-        body: { ...person, mass: -10 },
+    describe('should return 400', () => {
+      it('if mass is negative', async () => {
+        const { ctx, next } = createContextMock({
+          params: {
+            id: '1',
+          },
+          body: { ...person, mass: -10 },
+        });
+
+        await patchPerson(ctx, next);
+
+        expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
+        expect(ctx.body).toBe('Height or mass cannot be a negative number.');
       });
 
-      await patchPerson(ctx, next);
+      it('if height is negative', async () => {
+        const { ctx, next } = createContextMock({
+          params: {
+            id: '1',
+          },
+          body: { ...person, height: -10 },
+        });
 
-      expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
-      expect(ctx.body).toBe('Height or mass cannot be a negative number.');
-    });
+        await patchPerson(ctx, next);
 
-    it('should throw 404 if height is negative', async () => {
-      const { ctx, next } = createContextMock({
-        params: {
-          id: '1',
-        },
-        body: { ...person, height: -10 },
+        expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
+        expect(ctx.body).toBe('Height or mass cannot be a negative number.');
       });
-
-      await patchPerson(ctx, next);
-
-      expect(ctx.status).toBe(StatusCodes.BAD_REQUEST);
-      expect(ctx.body).toBe('Height or mass cannot be a negative number.');
     });
   });
 
@@ -196,7 +200,7 @@ describe('People Controller', () => {
       expect(ctx.status).toBe(StatusCodes.NO_CONTENT);
     });
 
-    it('should throw 404 - person not found', async () => {
+    it('should return 404 - person not found', async () => {
       const { ctx, next } = createContextMock();
 
       await removePerson(ctx, next);

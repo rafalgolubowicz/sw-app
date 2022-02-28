@@ -67,6 +67,12 @@ const patchPerson: PatchPerson = async (ctx, next) => {
     const { id } = ctx.params;
     const person = await updatePerson(+id, ctx.request.body);
 
+    if (!person) {
+      ctx.status = StatusCodes.NOT_FOUND;
+
+      return;
+    }
+
     ctx.body = person;
     ctx.status = StatusCodes.OK;
 
