@@ -31,11 +31,11 @@ const getPeople = async (
 const getPerson = async (ctx: KoaContext, next: Next) => {
   try {
     const { id } = ctx.params;
-
     const person = await findPerson(+id);
 
     if (!person) {
       ctx.status = StatusCodes.NOT_FOUND;
+
       return next();
     }
 

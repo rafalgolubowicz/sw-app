@@ -22,11 +22,11 @@ const addPerson: AddPerson = (person) => {
       name: person.name,
       height: person.height,
       mass: person.mass,
-      birthYear: person.birthYear || undefined,
-      eyeColor: person.eyeColor || undefined,
-      gender: person.gender || undefined,
-      hairColor: person.hairColor || undefined,
-      skinColor: person.skinColor || undefined,
+      birthYear: person.birthYear,
+      eyeColor: person.eyeColor,
+      gender: person.gender,
+      hairColor: person.hairColor,
+      skinColor: person.skinColor,
     },
   });
 };
