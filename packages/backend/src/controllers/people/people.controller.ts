@@ -19,7 +19,6 @@ import { PaginatedQuery } from '../../types';
 
 const getPeople: GetPeople = async (ctx, next) => {
   const { skip, take } = ctx.request.query as PaginatedQuery;
-
   const people = await findPeople({ skip, take });
   const peopleCount = await getPeopleCount();
 
