@@ -2,9 +2,10 @@ import { Card, Image, Typography } from 'antd';
 
 import { ModeCardProps } from './types';
 
-const ModeCard = ({ img, title, onClick }: ModeCardProps) => (
+const ModeCard = ({ img, title, testId, onClick }: ModeCardProps) => (
   <Card
     {...{ onClick }}
+    data-testid={testId}
     hoverable
     style={{
       width: '100%',

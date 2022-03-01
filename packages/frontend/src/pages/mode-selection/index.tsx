@@ -21,6 +21,7 @@ const ModeSelectionPage = () => {
       <Row gutter={16}>
         <Col span={24} md={12} style={{ display: 'flex' }}>
           <ModeCard
+            testId={FightMode.PEOPLE}
             img={SkywalkerImage}
             onClick={() => onSelectMode(FightMode.PEOPLE)}
             title={intl.formatMessage({
@@ -31,6 +32,7 @@ const ModeSelectionPage = () => {
         </Col>
         <Col md={12} style={{ display: 'flex' }}>
           <ModeCard
+            testId={FightMode.STARSHIPS}
             img={StarshipImage}
             onClick={() => onSelectMode(FightMode.STARSHIPS)}
             title={intl.formatMessage({
