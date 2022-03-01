@@ -1,29 +1,27 @@
-import { useIntl } from 'react-intl';
 import { Col, Row, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { FightMode } from './const';
-import { useModeSelection } from './hooks';
+import { TestIds } from './const';
+import { ROUTES } from '../../routes/const';
 import ModeCard from '../../components/ModeCard';
 import { SkywalkerImage, StarshipImage } from '../../assets/images';
 
 const ModeSelectionPage = () => {
   const intl = useIntl();
-  const { onSelectMode } = useModeSelection();
+  const navigate = useNavigate();
 
   return (
     <>
       <Typography.Title style={{ textAlign: 'center' }}>
-        {intl.formatMessage({
-          id: 'mode.select',
-          defaultMessage: 'Select mode',
-        })}
+        <FormattedMessage id="mode.select" defaultMessage="Select mode" />
       </Typography.Title>
       <Row gutter={16}>
         <Col span={24} md={12} style={{ display: 'flex' }}>
           <ModeCard
-            testId={FightMode.PEOPLE}
+            testId={TestIds.People}
             img={SkywalkerImage}
-            onClick={() => onSelectMode(FightMode.PEOPLE)}
+            onClick={() => navigate(ROUTES.People)}
             title={intl.formatMessage({
               id: 'mode.peopleFight',
               defaultMessage: 'People Fight',
@@ -32,9 +30,9 @@ const ModeSelectionPage = () => {
         </Col>
         <Col md={12} style={{ display: 'flex' }}>
           <ModeCard
-            testId={FightMode.STARSHIPS}
+            testId={TestIds.Starships}
             img={StarshipImage}
-            onClick={() => onSelectMode(FightMode.STARSHIPS)}
+            onClick={() => navigate(ROUTES.Starships)}
             title={intl.formatMessage({
               id: 'mode.starshipsFight',
               defaultMessage: 'Starships Fight',

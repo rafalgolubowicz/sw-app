@@ -1,4 +1,4 @@
-export enum FightMode {
-  PEOPLE = 'people',
-  STARSHIPS = 'starships',
-}
+export const TestIds = {
+  People: 'people',
+  Starships: 'starships',
+};

@@ -1,4 +1,4 @@
-import { FightMode } from './const';
+import { TestIds } from './const';
 import ModeSelectionPage from './index';
 import { ROUTES } from '../../routes/const';
 import { render, screen } from '../../test-utils';
@@ -6,7 +6,7 @@ import { render, screen } from '../../test-utils';
 describe('mode selection page', () => {
   it('should redirect to people fight page', () => {
     render(<ModeSelectionPage />);
-    const peopleFightCard = screen.getByTestId(FightMode.PEOPLE);
+    const peopleFightCard = screen.getByTestId(TestIds.People);
 
     peopleFightCard.click();
 
@@ -15,7 +15,7 @@ describe('mode selection page', () => {
 
   it('should redirect to starships fight page', () => {
     render(<ModeSelectionPage />);
-    const peopleFightCard = screen.getByTestId(FightMode.STARSHIPS);
+    const peopleFightCard = screen.getByTestId(TestIds.Starships);
 
     peopleFightCard.click();
 
