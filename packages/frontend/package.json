@@ -9,14 +9,18 @@
     "eject": "react-scripts eject",
     "extract": "formatjs extract './src/**/*.ts*' --ignore './src/**/*.d.ts' --out-file './content/locales/en.json'",
     "compile": "formatjs compile-folder --ast './content/locales' './content/locales/compiled'",
-    "gen-translations": "yarn extract && yarn compile"
+    "gen-translations": "yarn extract && yarn compile",
+    "gen-api": "orval"
   },
   "dependencies": {
     "@formatjs/intl": "^2.0.0",
     "antd": "^4.18.9",
+    "axios": "^0.26.0",
+    "orval": "^6.6.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^5.24.6",
+    "react-query": "^3.34.16",
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "sass": "^1.49.9"
