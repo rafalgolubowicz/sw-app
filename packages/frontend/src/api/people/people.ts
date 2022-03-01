@@ -18,7 +18,7 @@ import {
 import type {
   Person,
   CreatePersonBody,
-  GetPeople200Item,
+  GetPeople200,
   GetPeopleParams,
   PatchPersonBody,
 } from '.././model';
@@ -75,11 +75,7 @@ export const useCreatePerson = <
  * @summary Get all the people resources
  */
 export const getPeople = (params?: GetPeopleParams) => {
-  return instance<GetPeople200Item[]>({
-    url: `/people`,
-    method: 'get',
-    params,
-  });
+  return instance<GetPeople200>({ url: `/people`, method: 'get', params });
 };
 
 export const getGetPeopleQueryKey = (params?: GetPeopleParams) => [

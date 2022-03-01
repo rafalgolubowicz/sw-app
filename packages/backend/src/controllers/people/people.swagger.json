@@ -68,18 +68,15 @@
           "200": {
             "description": "List of people",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "items": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/Person" }
-                  },
-                  "count": {
-                    "type": "integer",
-                    "example": 1
-                  }
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/Person" }
+                },
+                "count": {
+                  "type": "integer",
+                  "example": 1
                 }
               }
             }
