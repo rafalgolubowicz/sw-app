@@ -1,20 +1,22 @@
-import { Layout } from 'antd';
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
 
+import {
+  ModeSelectionPage,
+  PeopleFightPage,
+  StarshipsFightPage,
+} from '../pages';
 import { ROUTES } from './const';
-import Header from '../components/Header';
-import HomePage from '../pages/home';
+import PageLayout from '../components/PageLayout';
 
 const Routes = () => (
-  <Layout className="site-layout">
-    <Header />
-    <Layout.Content className="site-layout-background">
-      <RouterRoutes>
-        <Route path={ROUTES.Home} element={<HomePage />} />
-        <Route path="*" element={<Navigate to={ROUTES.Home} />} />
-      </RouterRoutes>
-    </Layout.Content>
-  </Layout>
+  <PageLayout>
+    <RouterRoutes>
+      <Route path={ROUTES.Home} element={<ModeSelectionPage />} />
+      <Route path={ROUTES.People} element={<PeopleFightPage />} />
+      <Route path={ROUTES.Starships} element={<StarshipsFightPage />} />
+      <Route path="*" element={<Navigate to={ROUTES.Home} />} />
+    </RouterRoutes>
+  </PageLayout>
 );
 
 export default Routes;
