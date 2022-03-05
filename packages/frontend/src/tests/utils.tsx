@@ -1,6 +1,6 @@
 import { render, RenderOptions } from '@testing-library/react';
 
-import Providers from './providers';
+import Providers from '../providers';
 
 const customRender = (ui: React.ReactElement, options: RenderOptions = {}) =>
   render(ui, { wrapper: Providers, ...options });

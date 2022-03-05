@@ -1,12 +1,13 @@
 import { useCallback } from 'react';
 import { Button, Typography } from 'antd';
+import { FormattedMessage } from 'react-intl';
 
+import { TestIds } from './const';
 import PlayerState from './PlayerState';
 import { Person } from '../../api/model';
 import Loader from '../../components/Loader';
 import { useFight } from '../../hooks/useFight';
 import { useGetPeople } from '../../api/people/people';
-import { FormattedMessage } from 'react-intl';
 
 const PeopleFightPage = () => {
   const { data, isLoading } = useGetPeople();
@@ -47,7 +48,10 @@ const PeopleFightPage = () => {
       <Button style={{ margin: '20px 0' }} onClick={fight}>
         <FormattedMessage id="fights.nextFight" defaultMessage="Next fight!" />
       </Button>
-      <Typography.Title style={{ textTransform: 'uppercase' }}>
+      <Typography.Title
+        data-testid={TestIds.FightResult}
+        style={{ textTransform: 'uppercase' }}
+      >
         {currentFightWinner === 0 ? (
           <FormattedMessage id="misc.draw" defaultMessage="Draw" />
         ) : (
