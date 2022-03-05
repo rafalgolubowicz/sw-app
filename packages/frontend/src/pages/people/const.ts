@@ -37,3 +37,7 @@ export const personDataRows: RowItem[] = [
     defaultMessage: 'Gender',
   },
 ];
+
+export const TestIds = {
+  FightResult: 'fight-result',
+};

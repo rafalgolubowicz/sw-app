@@ -13,6 +13,7 @@ const UnitCard = <T extends Record<string, any>>({
 
   return (
     <Descriptions
+      column={12}
       style={{ width: 300 }}
       labelStyle={{
         background: highlighted ? 'lightyellow' : 'inherit',

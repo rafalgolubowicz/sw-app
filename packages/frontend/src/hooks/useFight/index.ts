@@ -16,13 +16,20 @@ const useFight = <T>({ data, comparator }: UseFightOptions<T>) => {
 
   const fight = useCallback(() => {
     const [unit1, unit2] = [pickItem(), pickItem()];
-    const winner = comparator(unit1, unit2);
+    const result = comparator(unit1, unit2);
+
+    /*
+      If result < 0, then player 1 wins. 
+      If result > 0, then player 2 wins. 
+      If result === 0, then draw. 
+    */
+    const winner = result < 0 ? -1 : result > 0 ? 1 : 0;
 
     setUnits([unit1, unit2]);
     setCurrentFightWinner(winner);
     setScore(([score1, score2]) => [
-      score1 + Number(winner < 0),
-      score2 + Number(winner > 0),
+      score1 + Number(result < 0),
+      score2 + Number(result > 0),
     ]);
   }, [comparator, pickItem]);
 
