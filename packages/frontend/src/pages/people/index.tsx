@@ -29,7 +29,7 @@ const PeopleFightPage = () => {
   const [leftPlayerScore, rightPlayerScore] = score;
 
   return (
-    <div className="h-100 flex center column">
+    <div className="flex center column">
       <div className="fight-container mb-1">
         <PlayerState
           data={leftPlayerUnit}
