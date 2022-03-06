@@ -1,7 +1,7 @@
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: process.env.API_URL,
 });
 
 export const instance = <T>(config: AxiosRequestConfig): Promise<T> => {
