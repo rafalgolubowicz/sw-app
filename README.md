@@ -31,3 +31,9 @@ If you get any error with missing dependencies inside of a container just run `d
 - **yarn gen-swagger:api** - generate Swagger definition based on smaller parts (packages/backend/\_\_swagger.json will be rendered)
 - **yarn migrate:db** - create a migration with schema changes
 - **yarn seed:db** - seed database
+
+## Development urls
+
+- **http://localhost:8080/\_\_swagger** - Swagger
+- **http://localhost:8080** - Rest API
+- **http://localhost:3000** - Frontend APP

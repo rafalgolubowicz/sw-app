@@ -1,3 +1,3 @@
-const StarshipsFightPage = () => <p>Starships</p>;
+const StarshipsFightPage = () => <p>Page not implemented</p>;
 
 export default StarshipsFightPage;
